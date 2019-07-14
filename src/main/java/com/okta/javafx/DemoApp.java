@@ -19,9 +19,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -31,12 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import org.apache.http.util.EntityUtils;
 
 public class DemoApp extends Application {
 
@@ -118,17 +114,11 @@ public class DemoApp extends Application {
 
         System.out.println("Response Code : " + response.getStatusLine().getStatusCode());
 
-        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        String content = EntityUtils.toString(response.getEntity());
 
-        StringBuffer result = new StringBuffer();
-        String line = "";
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
-        }
+        System.out.println("Result : " + content.toString());
 
-        System.out.println("Result : " + result.toString());
-
-        return result.toString();
+        return content.toString();
     }
 
     public static String prettyPrintJson(String json) {
