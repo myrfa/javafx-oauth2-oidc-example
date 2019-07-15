@@ -217,7 +217,9 @@ public class DemoApp extends Application {
             // Exchange the auth code for the access token
 
             String token = getTokenForCode(code);
-            
+
+            // Configure stage and scene to display token results
+
             primaryStage.setTitle("JavaFX Okta OAuth");
 
             Text tokenText = new Text();
