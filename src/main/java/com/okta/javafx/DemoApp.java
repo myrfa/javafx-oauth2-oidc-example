@@ -41,7 +41,7 @@ public class DemoApp extends Application {
     public static void main(String[] args) throws AuthorizationException, URISyntaxException  {
         launch(args);
     }
-    
+
     // These are pulled from gradle.properties
     String oktaDomain;
     String clientId;
@@ -58,28 +58,27 @@ public class DemoApp extends Application {
      * @throws MalformedURLException
      */
     public URI getAuthorizationEndpointUri() throws URISyntaxException, MalformedURLException {
-        
+
         URIBuilder builder = new URIBuilder();
 
         builder.setScheme("https");
-        builder.setHost("dev-533919.oktapreview.com");
+        builder.setHost(oktaDomain);
         builder.setPath("/oauth2/default/v1/authorize");
         builder.addParameter("client_id", clientId);
-        builder.addParameter("redirect_uri", "http://localhost:8080/authorization-code/callback");
+        builder.addParameter("redirect_uri", redirectUri);
         builder.addParameter("response_type", "code");
         builder.addParameter("state", "this is a state");
-        builder.addParameter("scope", "profile email openid");
+        builder.addParameter("scope", scope);
 
         URL url = builder.build().toURL();
-        URI authorizationEndpoint = url.toURI();
 
-        return authorizationEndpoint;
-        
+        return url.toURI();
+
     }
 
     /**
      * Requests an authorization code from the auth server
-     * 
+     *
      * @return
      * @throws MalformedURLException
      * @throws URISyntaxException
@@ -110,12 +109,12 @@ public class DemoApp extends Application {
         System.out.println(code);
 
         return code;
-        
+
     }
 
     /**
      * Given an authorization code, calls the auth server to request a token
-     * 
+     *
      * @param code
      * @return
      * @throws URISyntaxException
