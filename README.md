@@ -1,6 +1,4 @@
-# OIDC Authentication With JavaFX and Okta
-
-**Requires** Oracle's Java 8
+# OIDC Authentication with JavaFX and Okta
 
 This example shows how to use OIDC authentication in a JavaFX application. Please read [How to Build a JavaFX Desktop App with OIDC Authentication](https://developer.okta.com/blog/2019/08/14/javafx-tutorial-oauth2-oidc) to see how this example was created.
 
